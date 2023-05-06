@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: darkgrey;
+}
+
+/* styly pro obrazovky s menší šířkou než 768px */
+
+@media screen and (max-width: 768px) {
+    .logreg {
+        width: 80%;
+        max-width: 350px;
+    }
+    
+    .logreg input[type="text"],
+    .logreg input[type="password"],
+    .logreg input[type="email"],
+    .logreg input[type="submit"] {
+        width: 100%;
+    }
+}
+
+/* styly pro obrazovky s větší šířkou než 768px */
+
+@media screen and (min-width: 768px) {
+    .logreg {
+        width: 350px;
+    }
+    
+    .logreg input[type="text"],
+    .logreg input[type="password"],
+    .logreg input[type="email"] {
+        width: 200px;
+    }
+}
+
+/* společné styly */
+
+.logreg {
+    padding: 40px;
+    background-color: #333;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 20px;
+}
+
+.logreg h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.logreg p {
+    margin: 30px 0 0 0;
+    color: white;
+}
+
+.logreg p a{
+    color: #3498db;
+}
+
+.logreg input[type = "text"],
+.logreg input[type = "password"],
+.logreg input[type = "email"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.logreg input[type = "submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.logreg input[type = "submit"]:hover {
+    background-color: #2ecc71;
+}

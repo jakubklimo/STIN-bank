@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KlimoBank - přihlášení</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <form class="logreg" action="/index" method="post">
+            <h1>Přihlášení</h1>
+            <input type="text" name="klientNum" id="klientNum" placeholder="Klientské číslo">
+            <input type="password" name="heslo" id="heslo" placeholder="Heslo">
+            <input type="submit" name="login" id="login" value="Přihlášení">
+            <p>Nejste registrován? <a href="/register">Registrovat</a></p>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
