@@ -16,6 +16,8 @@
             <h1>Přihlášení</h1>
             <input type="text" name="klientNum" id="klientNum" placeholder="Klientské číslo">
             <input type="password" name="heslo" id="heslo" placeholder="Heslo">
+            <span th:text="${warningLogin}"></span>
+            <span th:text="${wrongLogin}"></span>
             <input type="submit" name="login" id="login" value="Přihlášení">
             <p>Nejste registrován? <a href="/register">Registrovat</a></p>
         </form>

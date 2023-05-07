@@ -101,3 +101,7 @@ body {
 .logreg input[type = "submit"]:hover {
     background-color: #2ecc71;
 }
+
+span{
+    color: white;
+}

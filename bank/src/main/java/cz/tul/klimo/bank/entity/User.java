@@ -15,6 +15,8 @@ public class User {
         this.heslo = heslo;
     }
 
+    public User(){}
+
     public int getKlientNum(){
         return klientNum;
     }
@@ -22,4 +24,6 @@ public class User {
     public String getHeslo(){
         return heslo;
     }
+
+    public String getJmeno(){return jmeno;}
 }
