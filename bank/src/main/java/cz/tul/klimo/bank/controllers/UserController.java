@@ -19,18 +19,9 @@ public class BankController {
 
     @PostMapping("/index")
     public String processLogin(@RequestParam("klientNum") String klientNum, @RequestParam("heslo") String heslo, Model model, HttpSession session){
-        users.add(new User(1, "admin", "admin", "admin@admin", "buch"));
-        if(klientNum.equals("") || heslo.equals("")){
-            model.addAttribute("warningLogin", "Zadejete všechny hodnoty.");
-            return "index";
-        }
-        User userIn = null;
-        for(User user:users){
-            if(user.getKlientNum() == Integer.parseInt(klientNum)){
-                userIn = user;
-            }
-        }
-        if(userIn != null && userIn.getKlientNum() == Integer.parseInt(klientNum) && userIn.getHeslo().equals(heslo)){
+        User user = null;
+
+        if(userIn != null && Integer.toString(userIn.getKlientNum()).equals(klientNum) && userIn.getHeslo().equals(heslo)){
             session.setAttribute("user", userIn);
             return "redirect:/home";
         }else{
