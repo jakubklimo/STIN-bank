@@ -17,14 +17,13 @@
         <form class="logreg" action="/register" method="post">
             <h1>Registrace</h1>
             <label hidden for="jmeno">Jméno:</label>
-            <input type="text" name="jmeno" id="jmeno" placeholder="Jméno">
+            <input type="text" name="jmeno" id="jmeno" placeholder="Jméno" required>
             <label hidden for="prijmeni">Přijmení:</label>
-            <input type="text" name="prijmeni" id="prijmeni" placeholder="Příjmení">
+            <input type="text" name="prijmeni" id="prijmeni" placeholder="Příjmení" required>
             <label hidden for="email">E-mail:</label>
-            <input type="email" name="email" id="email" placeholder="E-mail">
+            <input type="email" name="email" id="email" placeholder="E-mail" required>
             <label hidden for="heslo">Heslo:</label>
-            <input type="password" name="heslo" id="heslo" placeholder="Heslo" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Musí obsahovat alespoň jedno číslo, jedno velké a jedno malé písmeno a musí být alespoň 8 znaků dlouhé.">
-            <span th:text="${warningRegister}"></span>
+            <input type="password" name="heslo" id="heslo" placeholder="Heslo" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Musí obsahovat alespoň jedno číslo, jedno velké a jedno malé písmeno a musí být alespoň 8 znaků dlouhé." required>
             <input type="submit" name="register" id="register" value="Registrovat">
             <p><a href="/index">Zpět na přihlášení</a></p>
         </form>

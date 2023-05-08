@@ -12,11 +12,8 @@ public class HomeController {
     @GetMapping("/home")
     public String showHomePage(HttpSession session, Model model){
         User user = (User) session.getAttribute("user");
-        String jmeno = user.getJmeno();
-        if(jmeno != null){
-            model.addAttribute("jmeno", jmeno);
-            return "home";
-        }
+        model.addAttribute("jmeno", user.getJmeno());
+        model.addAttribute("klientNum", user.getKlientNum());
         return "home";
     }
 
