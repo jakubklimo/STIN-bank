@@ -43,4 +43,7 @@ public class User {
         this.accounts.add(account);
     }
 
+    public List getAccounts(){
+        return accounts;
+    }
 }

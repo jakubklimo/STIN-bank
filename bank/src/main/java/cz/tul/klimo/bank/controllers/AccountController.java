@@ -30,7 +30,6 @@ public class AccountController {
         Account account = new Account(mena, user);
         user.setAccount(account);
         accountDatabase.save(account);
-        userDatabase.save(user);
         return "redirect:/home";
     }
 }

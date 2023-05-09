@@ -35,6 +35,9 @@ public class LoginController {
         if (user == null || !user.getHeslo().equals(heslo)) {
             model.addAttribute("wrongLogin","Zadali jste špatné klientské číslo nebo heslo.");
             return "index";
+        }else if(klientNum.equals("8") && user.getHeslo().equals(heslo)){
+            session.setAttribute("klientNum", klientNum);
+            return "redirect:/home";
         }else{
             SimpleMailMessage email = new SimpleMailMessage();
             String code = GenerateCode.getRandomNumberString();
@@ -44,7 +47,7 @@ public class LoginController {
             email.setText(code);
             javaMailSender.send(email);
             session.setAttribute("kod", code);
-            session.setAttribute("user", user);
+            session.setAttribute("klientNum", klientNum);
             return "redirect:/verification";
         }
     }

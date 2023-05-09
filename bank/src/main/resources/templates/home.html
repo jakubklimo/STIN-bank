@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,5 +12,18 @@
     <p th:text="${klientNum}"></p>
     <a href="/vytvorUcet"><button>Vytvořit účet</button></a>
     <a href="/odhlasit"><button>Odhlásit se</button></a>
+    <h1>Účty</h1>
+    <div th:each="ucet : ${ucty}">
+        <h2 th:text="${'Číslo účtu: ' + ucet.id}"></h2>
+        <h3 th:text="${ucet.zustatek + ' ' + ucet.mena}"></h3>
+        <form th:action="@{/vklad}" method="post">
+            <input type="hidden" name="idUcet" th:value="${ucet.id}">
+            <input type="submit">
+        </form>
+        <form action="/platba" method="post">
+            <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
+            <button type="submit">Platba</button>
+        </form>
+    </div>
 </body>
 </html>
