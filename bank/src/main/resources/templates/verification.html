@@ -8,6 +8,14 @@
   <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-
+  <main>
+    <form class="logreg" action="/verification" method="post">
+      <h1>Dvoufázové ověření</h1>
+      <p>Zadejte kód, který jsme Vám poslali do emailu.</p>
+      <input type="text" required name="verifikace" id="verifikace">
+      <span th:text="${wrongCode}"></span>
+      <input type="submit" name="verifi" id="verifi" value="Potvrdit">
+    </form>
+  </main>
 </body>
 </html>
