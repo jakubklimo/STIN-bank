@@ -33,4 +33,6 @@ public class User {
     }
 
     public String getJmeno(){return jmeno;}
+
+    public String getEmail(){return email;}
 }
