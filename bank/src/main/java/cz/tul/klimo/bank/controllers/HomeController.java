@@ -17,6 +17,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/vytvorUcet")
+    public String createAcc(){
+        return "redirect:/createAcc";
+    }
+
     @GetMapping("/odhlasit")
     public String logout(HttpSession session){
         session.invalidate();

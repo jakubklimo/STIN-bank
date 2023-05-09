@@ -16,7 +16,8 @@ body {
         width: 80%;
         max-width: 350px;
     }
-    
+
+    .logreg select,
     .logreg input[type="text"],
     .logreg input[type="password"],
     .logreg input[type="email"],
@@ -31,7 +32,8 @@ body {
     .logreg {
         width: 350px;
     }
-    
+
+    .logreg select,
     .logreg input[type="text"],
     .logreg input[type="password"],
     .logreg input[type="email"] {
@@ -67,6 +69,7 @@ body {
     color: #3498db;
 }
 
+.logreg select,
 .logreg input[type = "text"],
 .logreg input[type = "password"],
 .logreg input[type = "email"] {

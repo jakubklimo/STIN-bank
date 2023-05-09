@@ -1,9 +1,9 @@
 package cz.tul.klimo.bank.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Users")
 public class User {
@@ -14,6 +14,9 @@ public class User {
     private String prijmeni;
     private String email;
     private String heslo;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Account> accounts = new ArrayList<>();
 
     public User(String jmeno, String prijmeni, String email, String heslo){
         this.jmeno = jmeno;
@@ -35,4 +38,9 @@ public class User {
     public String getJmeno(){return jmeno;}
 
     public String getEmail(){return email;}
+
+    public void setAccount(Account account){
+        this.accounts.add(account);
+    }
+
 }
