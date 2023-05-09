@@ -29,11 +29,48 @@ public class TransactionController {
     public String deposit(@RequestParam("castka") double castka, HttpSession session){
         int id = Integer.parseInt((String) session.getAttribute("idUcet"));
         Account account = accountDatabase.findById(id);
-        Transaction transaction = new Transaction('V', castka, account);
+        Transaction transaction = new Transaction("Vklad", castka, account);
         account.vklad(castka);
         account.setTransaction(transaction);
         transactionDatabase.save(transaction);
         accountDatabase.save(account);
+        session.removeAttribute("idUcet");
+        return "redirect:/home";
+    }
+
+    @GetMapping("/pay")
+    public String showPayPage(){
+        return "pay";
+    }
+
+    @PostMapping("/pay")
+    public String pay(@RequestParam("castka") double castka, @RequestParam("prijemce") String prijemce,HttpSession session, Model model){
+        int id = Integer.parseInt((String) session.getAttribute("idUcet"));
+        Account account = accountDatabase.findById(id);
+        Transaction transaction = new Transaction("Platba", castka, Integer.parseInt(prijemce),account);
+        if(!account.platba(castka)){
+            model.addAttribute("money", "Na účtu není dostatek peněz.");
+            return "pay";
+        }else {
+            account.setTransaction(transaction);
+            transactionDatabase.save(transaction);
+            accountDatabase.save(account);
+            session.removeAttribute("idUcet");
+            return "redirect:/home";
+        }
+    }
+
+    @GetMapping("/transactionLog")
+    public String showLogPage(HttpSession session, Model model){
+        int id = Integer.parseInt((String) session.getAttribute("idUcet"));
+        Account account = accountDatabase.findById(id);
+        model.addAttribute("cisloUctu", id);
+        model.addAttribute("transactions", account.getTransactions());
+        return "transactionLog";
+    }
+
+    @GetMapping("/zavrit")
+    public String close(HttpSession session){
         session.removeAttribute("idUcet");
         return "redirect:/home";
     }

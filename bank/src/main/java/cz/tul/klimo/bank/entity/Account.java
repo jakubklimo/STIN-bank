@@ -44,7 +44,20 @@ public class Account {
         this.transactions.add(transaction);
     }
 
+    public List getTransactions(){
+        return transactions;
+    }
+
     public void vklad(double castka){
         zustatek += castka;
+    }
+
+    public Boolean platba(double castka){
+        if((zustatek - castka) >= 0){
+            zustatek -= castka;
+            return true;
+        }else{
+            return false;
+        }
     }
 }

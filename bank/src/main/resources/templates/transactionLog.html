@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="cz" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KlimoBank - přihlášení</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+  <main>
+    <h1>Výpis účtu</h1>
+    <h2 th:text="${'Číslo účtu: ' + cisloUctu}"></h2>
+    <table>
+      <tr>
+        <th>Typ</th>
+        <th>Částka</th>
+        <th>Datum</th>
+        <th>Příjemce</th>
+      </tr>
+      <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.typ}"></td>
+        <td th:text="${transaction.castka}"></td>
+        <td th:text="${transaction.datum}"></td>
+        <td th:text="${transaction.prijemce}"></td>
+      </tr>
+    </table>
+    <a href="/zavrit"><button>Zavřít</button></a>
+  </main>
+</body>
+</html>

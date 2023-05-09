@@ -18,11 +18,19 @@
         <h3 th:text="${ucet.zustatek + ' ' + ucet.mena}"></h3>
         <form th:action="@{/vklad}" method="post">
             <input type="hidden" name="idUcet" th:value="${ucet.id}">
-            <input type="submit">
+            <input type="submit" name="vklad" id="vklad" value="Vklad">
         </form>
         <form action="/platba" method="post">
             <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
-            <button type="submit">Platba</button>
+            <input type="submit" name="platba" id="platba" value="Platba">
+        </form>
+        <form action="/vypis" method="post">
+            <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
+            <input type="submit" name="vypis" id="vypis" value="Výpis účtu">
+        </form>
+        <form action="/smazat" method="post">
+            <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
+            <input type="submit" name="smazat" id="smazat" value="Smazat účet">
         </form>
     </div>
 </body>

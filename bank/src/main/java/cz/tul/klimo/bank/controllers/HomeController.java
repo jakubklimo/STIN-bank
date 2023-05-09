@@ -1,6 +1,9 @@
 package cz.tul.klimo.bank.controllers;
 
+import cz.tul.klimo.bank.database.AccountDatabase;
+import cz.tul.klimo.bank.database.AccountDatabaseService;
 import cz.tul.klimo.bank.database.UserDatabaseService;
+import cz.tul.klimo.bank.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
@@ -16,6 +19,8 @@ public class HomeController {
 
     @Autowired
     private UserDatabaseService userService;
+    @Autowired
+    private AccountDatabase accountDatabase;
 
     @GetMapping("/home")
     public String showHomePage(HttpSession session, Model model){
@@ -36,6 +41,24 @@ public class HomeController {
     public String deposit(@RequestParam("idUcet") String id, HttpSession session){
         session.setAttribute("idUcet", id);
         return "redirect:/deposit";
+    }
+
+    @PostMapping("/platba")
+    public String pay(@RequestParam("idUcet") String id, HttpSession session){
+        session.setAttribute("idUcet", id);
+        return "redirect:/pay";
+    }
+
+    @PostMapping("/vypis")
+    public String log(@RequestParam("idUcet") String id, HttpSession session){
+        session.setAttribute("idUcet", id);
+        return "redirect:/transactionLog";
+    }
+
+    @PostMapping("/smazat")
+    public String delete(@RequestParam("idUcet") String id){
+        accountDatabase.deleteById(Integer.parseInt(id));
+        return "redirect:/home";
     }
 
     @GetMapping("/odhlasit")
