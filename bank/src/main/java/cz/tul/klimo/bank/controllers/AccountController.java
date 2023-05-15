@@ -27,9 +27,17 @@ public class AccountController {
     public String processCreateAcc(HttpServletRequest request, HttpSession session){
         String mena = request.getParameter("mena");
         User user = (User)session.getAttribute("user");
+        if(user == null){
+            return "redirect:/index";
+        }
         Account account = new Account(mena, user);
         user.setAccount(account);
         accountDatabase.save(account);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/zavrit1")
+    public String close(){
         return "redirect:/home";
     }
 }

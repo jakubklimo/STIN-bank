@@ -35,6 +35,38 @@ public class User {
         return heslo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setJmeno(String jmeno) {
+        this.jmeno = jmeno;
+    }
+
+    public String getPrijmeni() {
+        return prijmeni;
+    }
+
+    public void setPrijmeni(String prijmeni) {
+        this.prijmeni = prijmeni;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setHeslo(String heslo) {
+        this.heslo = heslo;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
     public String getJmeno(){return jmeno;}
 
     public String getEmail(){return email;}

@@ -25,6 +25,9 @@ public class HomeController {
     @GetMapping("/home")
     public String showHomePage(HttpSession session, Model model){
         User user = userService.getById(Integer.parseInt((String)session.getAttribute("klientNum")));
+        if(user == null){
+            return "redirect:/index";
+        }
         session.setAttribute("user", user);
         model.addAttribute("jmeno", user.getJmeno());
         model.addAttribute("klientNum", user.getKlientNum());
@@ -33,32 +36,38 @@ public class HomeController {
     }
 
     @GetMapping("/vytvorUcet")
-    public String createAcc(){
+    public String createAcc(HttpSession session){
+        if(session.getAttribute("user") == null){
+            return "redirect:/index";
+        }
         return "redirect:/createAcc";
     }
 
     @PostMapping("/vklad")
     public String deposit(@RequestParam("idUcet") String id, HttpSession session){
+        if(session.getAttribute("user") == null){
+            return "redirect:/index";
+        }
         session.setAttribute("idUcet", id);
         return "redirect:/deposit";
     }
 
     @PostMapping("/platba")
     public String pay(@RequestParam("idUcet") String id, HttpSession session){
+        if(session.getAttribute("user") == null){
+            return "redirect:/index";
+        }
         session.setAttribute("idUcet", id);
         return "redirect:/pay";
     }
 
     @PostMapping("/vypis")
     public String log(@RequestParam("idUcet") String id, HttpSession session){
+        if(session.getAttribute("user") == null){
+            return "redirect:/index";
+        }
         session.setAttribute("idUcet", id);
         return "redirect:/transactionLog";
-    }
-
-    @PostMapping("/smazat")
-    public String delete(@RequestParam("idUcet") String id){
-        accountDatabase.deleteById(Integer.parseInt(id));
-        return "redirect:/home";
     }
 
     @GetMapping("/odhlasit")

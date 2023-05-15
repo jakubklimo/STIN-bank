@@ -11,11 +11,12 @@
 <main>
   <form class="logreg" action="/pay" method="post">
     <h1>Platba</h1>
-    <input type="number" name="castka" id="castka" placeholder="Částka" required>
+    <input type="text" name="castka" id="castka" placeholder="Částka" required>
     <input type="text" name="prijemce" id="prijemce" placeholder="Účet příjemce" required>
     <span th:text="${money}"></span>
     <input type="submit" name="zaplatit" id="zaplatit" value="Provést">
   </form>
+  <a href="/zavrit"><button>Zavřít</button></a>
 </main>
 </body>
 </html>

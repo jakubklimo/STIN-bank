@@ -22,6 +22,26 @@ public class Account {
 
     public Account(){}
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setMena(String mena) {
+        this.mena = mena;
+    }
+
+    public void setZustatek(double zustatek) {
+        this.zustatek = zustatek;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Account(String mena, User user){
         this.user = user;
         this.mena = mena;

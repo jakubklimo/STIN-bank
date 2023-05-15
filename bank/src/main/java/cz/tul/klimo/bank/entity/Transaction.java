@@ -26,6 +26,38 @@ public class Transaction {
         this.datum = LocalDateTime.now();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
+    public void setPrijemce(int prijemce) {
+        this.prijemce = prijemce;
+    }
+
+    public void setCastka(double castka) {
+        this.castka = castka;
+    }
+
+    public void setDatum(LocalDateTime datum) {
+        this.datum = datum;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public Transaction(String typ, double castka, int prijemce, Account account){
         this.typ = typ;
         this.castka = castka;

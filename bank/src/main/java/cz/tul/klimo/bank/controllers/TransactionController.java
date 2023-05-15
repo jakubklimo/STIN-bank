@@ -27,6 +27,9 @@ public class TransactionController {
 
     @PostMapping("/deposit")
     public String deposit(@RequestParam("castka") double castka, HttpSession session){
+        if(session.getAttribute("idUcet") == null){
+            return "redirect:/index";
+        }
         int id = Integer.parseInt((String) session.getAttribute("idUcet"));
         Account account = accountDatabase.findById(id);
         Transaction transaction = new Transaction("Vklad", castka, account);
@@ -45,6 +48,9 @@ public class TransactionController {
 
     @PostMapping("/pay")
     public String pay(@RequestParam("castka") double castka, @RequestParam("prijemce") String prijemce,HttpSession session, Model model){
+        if(session.getAttribute("idUcet") == null){
+            return "redirect:/index";
+        }
         int id = Integer.parseInt((String) session.getAttribute("idUcet"));
         Account account = accountDatabase.findById(id);
         Transaction transaction = new Transaction("Platba", castka, Integer.parseInt(prijemce),account);
@@ -62,6 +68,9 @@ public class TransactionController {
 
     @GetMapping("/transactionLog")
     public String showLogPage(HttpSession session, Model model){
+        if(session.getAttribute("idUcet") == null){
+            return "redirect:/index";
+        }
         int id = Integer.parseInt((String) session.getAttribute("idUcet"));
         Account account = accountDatabase.findById(id);
         model.addAttribute("cisloUctu", id);
