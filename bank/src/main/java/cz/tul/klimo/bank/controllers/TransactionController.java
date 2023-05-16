@@ -133,4 +133,12 @@ public class TransactionController {
         session.removeAttribute("idUcet");
         return "redirect:/home";
     }
+
+    public void setAccountService(AccountDatabaseService _accountService) {
+        accountDatabase = _accountService;
+    }
+
+    public void setTransactionService(TransactionDatabaseService _transactionService) {
+        transactionDatabase = _transactionService;
+    }
 }

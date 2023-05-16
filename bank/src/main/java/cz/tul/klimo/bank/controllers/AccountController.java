@@ -4,6 +4,7 @@ import cz.tul.klimo.bank.database.AccountDatabase;
 import cz.tul.klimo.bank.database.UserDatabase;
 import cz.tul.klimo.bank.entity.Account;
 import cz.tul.klimo.bank.entity.User;
+import cz.tul.klimo.bank.service.AccountDatabaseService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AccountController {
     @Autowired
-    private AccountDatabase accountDatabase;
+    private AccountDatabaseService accountDatabase;
     @Autowired
     private UserDatabase userDatabase;
 
@@ -32,7 +33,7 @@ public class AccountController {
         }
         Account account = new Account(mena, user);
         user.setAccount(account);
-        accountDatabase.save(account);
+        accountDatabase.createAccount(account);
         return "redirect:/home";
     }
 
