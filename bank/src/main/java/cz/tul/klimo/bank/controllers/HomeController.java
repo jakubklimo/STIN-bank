@@ -33,7 +33,6 @@ public class HomeController {
         if(user == null){
             return "redirect:/index";
         }
-        currencyService.updateKurzy();
         session.setAttribute("user", user);
         model.addAttribute("jmeno", user.getJmeno());
         model.addAttribute("klientNum", user.getKlientNum());

@@ -15,6 +15,7 @@ public class TransactionTest {
     public void setUp() {
         account = new Account("USD", new User());
         transaction = new Transaction("Platba", 100.0, account);
+        transaction.setCurrency("EUR");
     }
 
     @Test
@@ -125,6 +126,17 @@ public class TransactionTest {
         Assertions.assertEquals(0, transaction.getPrijemce());
         Assertions.assertNull(transaction.getDatum());
         Assertions.assertNull(transaction.getAccount());
+    }
+
+    @Test
+    public void testGetCurrency(){
+        Assertions.assertEquals("EUR", transaction.getCurrency());
+    }
+
+    @Test
+    public void testSetCurrency(){
+        transaction.setCurrency("CZK");
+        Assertions.assertEquals("CZK", transaction.getCurrency());
     }
 }
 

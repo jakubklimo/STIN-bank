@@ -1,5 +1,6 @@
-package cz.tul.klimo.bank.database;
+package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.UserDatabase;
 import cz.tul.klimo.bank.entity.User;
 import cz.tul.klimo.bank.service.UserDatabaseService;
 import org.junit.jupiter.api.Assertions;

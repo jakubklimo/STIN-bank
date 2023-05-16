@@ -71,4 +71,8 @@ public class CurrencyService {
     public Date getLastUpdated(){
         return lastUpdated;
     }
+
+    public void setLastUpdated(Date date){
+        this.lastUpdated = date;
+    }
 }

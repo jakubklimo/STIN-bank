@@ -1,5 +1,6 @@
-package cz.tul.klimo.bank.database;
+package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.AccountDatabase;
 import cz.tul.klimo.bank.entity.Account;
 import cz.tul.klimo.bank.service.AccountDatabaseService;
 import org.junit.jupiter.api.Assertions;
@@ -23,14 +24,14 @@ public class AccountDatabaseServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    /*@Test
+    @Test
     public void testCreateAccount() {
         Account account = new Account();
-        when(accountDatabase.save(account)).thenReturn(account);
 
-        Assertions.assertEquals(account, accountDatabaseService.createAccount(account));
+        accountDatabaseService.createAccount(account);
+
         verify(accountDatabase, times(1)).save(account);
-    }*/
+    }
 
     @Test
     public void testGetAccountById() {

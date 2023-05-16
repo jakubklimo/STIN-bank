@@ -9,6 +9,12 @@ public class Currency {
 
     }
 
+    public Currency(String code, int mnozstvi, double kurz){
+        this.code = code;
+        this.mnozstvi= mnozstvi;
+        this.kurz = kurz;
+    }
+
     public double getKurz() {
         return kurz;
     }
