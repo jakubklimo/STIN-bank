@@ -11,6 +11,8 @@ public class Transaction {
     private String typ;
     private int prijemce;
     private double castka;
+
+    private String currency;
     private LocalDateTime datum;
 
     @ManyToOne
@@ -80,5 +82,13 @@ public class Transaction {
 
     public LocalDateTime getDatum(){
         return datum;
+    }
+
+    public void setCurrency(String currency){
+        this.currency = currency;
+    }
+
+    public String getCurrency(){
+        return currency;
     }
 }

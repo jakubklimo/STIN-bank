@@ -1,7 +1,7 @@
-package cz.tul.klimo.bank.database;
+package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.AccountDatabase;
 import cz.tul.klimo.bank.entity.Account;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,8 @@ public class AccountDatabaseService {
     @Autowired
     private AccountDatabase accountDatabase;
 
-    public Account createAccount(Account account){
-        return accountDatabase.save(account);
+    public void createAccount(Account account){
+        accountDatabase.save(account);
     }
 
     public Account getAccountById(int id){

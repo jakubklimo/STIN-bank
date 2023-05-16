@@ -1,9 +1,9 @@
 package cz.tul.klimo.bank.controllers;
 
 import cz.tul.klimo.bank.database.AccountDatabase;
-import cz.tul.klimo.bank.database.AccountDatabaseService;
-import cz.tul.klimo.bank.database.UserDatabaseService;
-import cz.tul.klimo.bank.entity.Account;
+import cz.tul.klimo.bank.entity.Currency;
+import cz.tul.klimo.bank.service.CurrencyService;
+import cz.tul.klimo.bank.service.UserDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import cz.tul.klimo.bank.entity.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.text.ParseException;
 
 @Controller
 public class HomeController {
@@ -21,13 +23,17 @@ public class HomeController {
     private UserDatabaseService userService;
     @Autowired
     private AccountDatabase accountDatabase;
+    @Autowired
+    private CurrencyService currencyService;
+
 
     @GetMapping("/home")
-    public String showHomePage(HttpSession session, Model model){
+    public String showHomePage(HttpSession session, Model model) throws IOException, ParseException {
         User user = userService.getById(Integer.parseInt((String)session.getAttribute("klientNum")));
         if(user == null){
             return "redirect:/index";
         }
+        currencyService.updateKurzy();
         session.setAttribute("user", user);
         model.addAttribute("jmeno", user.getJmeno());
         model.addAttribute("klientNum", user.getKlientNum());

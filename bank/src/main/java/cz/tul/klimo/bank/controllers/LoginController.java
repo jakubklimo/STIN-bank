@@ -1,6 +1,6 @@
 package cz.tul.klimo.bank.controllers;
 
-import cz.tul.klimo.bank.database.UserDatabaseService;
+import cz.tul.klimo.bank.service.UserDatabaseService;
 import cz.tul.klimo.bank.entity.User;
 import cz.tul.klimo.bank.functions.GenerateCode;
 import jakarta.servlet.http.HttpSession;

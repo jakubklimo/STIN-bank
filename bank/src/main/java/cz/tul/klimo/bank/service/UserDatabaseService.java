@@ -1,5 +1,6 @@
-package cz.tul.klimo.bank.database;
+package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.UserDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cz.tul.klimo.bank.entity.User;
