@@ -1,107 +1,89 @@
 package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.CurrencyDatabase;
 import cz.tul.klimo.bank.entity.Currency;
-import org.junit.jupiter.api.Assertions;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class CurrencyServiceTest {
+@SpringBootTest
+public class CurrencyServiceTest {
 
     private static final String CNB_URL = "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt";
 
+    @Mock
+    private EntityManager entityManager;
+
+    @Mock
+    private CurrencyDatabase currencyDatabase;
+
+    @InjectMocks
     private CurrencyService currencyService;
 
     @BeforeEach
-    void setUp() {
-        currencyService = new CurrencyService();
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
     }
 
-    /*@Test
-    void updateKurzy_ShouldUpdateCurrencies() throws IOException, ParseException {
-        // Arrange
-        URL url = mock(URL.class);
-        BufferedReader reader = mock(BufferedReader.class);
-        when(url.openStream()).thenReturn(null);
-        when(reader.readLine()).thenReturn(null).thenReturn(null).thenReturn("A|Česká republika|CZK|1|1.0000");
-
-        currencyService.setLastUpdated(new Date(System.currentTimeMillis() - 10000));
-
-        // Act
-        currencyService.updateKurzy();
-
-        // Assert
-        List<Currency> expectedCurrencies = new ArrayList<>();
+    @Test
+    public void testCreateCurrency() {
         Currency currency = new Currency();
-        currency.setMnozstvi(1);
-        currency.setCode("CZK");
-        currency.setKurz(1.0000);
-        expectedCurrencies.add(currency);
+        currencyService.createCurrency(currency);
+        verify(currencyDatabase, times(1)).save(currency);
+    }
 
-        assertEquals(expectedCurrencies, currencyService.getKurzy());
-        verify(url).openStream();
-        verify(reader, times(3)).readLine();
-    }*/
-
-    /*@Test
-    void getKurz_WithExistingCode_ShouldReturnCurrency() {
-        // Arrange
-        List<Currency> currencies = new ArrayList<>();
+    @Test
+    public void testGetCurrency() {
+        String code = "USD";
         Currency currency = new Currency();
-        currency.setMnozstvi(1);
-        currency.setCode("CZK");
-        currency.setKurz(1.0000);
-        currencies.add(currency);
-        currencyService.setLastUpdated(new Date());
-
-        // Act
-        Currency result = currencyService.getKurz("CZK");
-
-        // Assert
+        when(currencyDatabase.findByCode(code)).thenReturn(currency);
+        Currency result = currencyService.getCurrency(code);
+        verify(currencyDatabase, times(1)).findByCode(code);
         assertEquals(currency, result);
-    }*/
-
-    @Test
-    void getKurz_WithNonExistingCode_ShouldReturnNull() {
-        // Arrange
-        List<Currency> currencies = new ArrayList<>();
-        Currency currency = new Currency();
-        currency.setMnozstvi(1);
-        currency.setCode("CZK");
-        currency.setKurz(1.0000);
-        currencies.add(currency);
-        currencyService.setLastUpdated(new Date());
-
-        // Act
-        Currency result = currencyService.getKurz("USD");
-
-        // Assert
-        assertEquals(null, result);
     }
 
     @Test
-    void getLastUpdatedDateTest(){
-        Date date = new Date();
-        currencyService.setLastUpdated(date);
-        Assertions.assertEquals(date, currencyService.getLastUpdated());
+    public void testDropTable() {
+        currencyService.dropTable();
+        verify(currencyDatabase, times(1)).deleteAll();
     }
 
     @Test
-    void setLastUpdatedTest(){
-        Date date = new Date();
-        currencyService.setLastUpdated(date);
-        Assertions.assertEquals(date, currencyService.getLastUpdated());
+    public void testGetLastUpdated() {
+        Date expectedDate = new Date();
+        currencyService.setLastUpdated(expectedDate);
+
+        // Verify
+        Date result = currencyService.getLastUpdated();
+        assertEquals(expectedDate, result);
+    }
+
+    @Test
+    public void testSetLastUpdated() {
+        Date expectedDate = new Date();
+
+        // Execute
+        currencyService.setLastUpdated(expectedDate);
+
+        // Verify
+        Date result = currencyService.getLastUpdated();
+        assertEquals(expectedDate, result);
     }
 }
+
 
