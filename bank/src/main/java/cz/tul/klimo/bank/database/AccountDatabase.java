@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountDatabase extends JpaRepository<Account, Long>{
     Account findById(int id);
+
 }

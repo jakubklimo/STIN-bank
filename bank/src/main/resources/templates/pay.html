@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KlimoBank - přihlášení</title>
+  <title>KlimoBank - platba</title>
   <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-<main>
-  <form class="logreg" action="/pay" method="post">
+<main class="logreg">
+  <form action="/pay" method="post">
     <h1>Platba</h1>
     <select id="currency" name="currency">
       <option value="CZK">CZK</option>
@@ -45,7 +45,7 @@
       <option value="USD">USD</option>
       <option value="GBP">GBP</option>
     </select>
-    <input type="text" name="castka" id="castka" placeholder="Částka" required>
+    <input type="number" name="castka" id="castka" placeholder="Částka" required min="1">
     <input type="text" name="prijemce" id="prijemce" placeholder="Účet příjemce" required>
     <span th:text="${money}"></span>
     <input type="submit" name="zaplatit" id="zaplatit" value="Provést">

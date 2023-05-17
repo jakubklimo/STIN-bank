@@ -17,6 +17,7 @@ body {
         max-width: 350px;
     }
 
+    .logreg input[type = "number"],
     .logreg select,
     .logreg input[type="text"],
     .logreg input[type="password"],
@@ -33,6 +34,7 @@ body {
         width: 350px;
     }
 
+    .logreg input[type = "number"],
     .logreg select,
     .logreg input[type="text"],
     .logreg input[type="password"],
@@ -69,7 +71,21 @@ body {
     color: #3498db;
 }
 
-.logreg select,
+
+.logreg select{
+    border: 0;
+    background: #333;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+.logreg input[type = "number"],
 .logreg input[type = "text"],
 .logreg input[type = "password"],
 .logreg input[type = "email"] {
@@ -86,6 +102,7 @@ body {
     transition: 0.25s;
 }
 
+.logreg button,
 .logreg input[type = "submit"] {
     border: 0;
     background: none;
@@ -101,10 +118,117 @@ body {
     cursor: pointer;
 }
 
+.home a,
+.logreg a{
+    text-decoration: none;
+}
+
+.ucet form input:hover,
+.home button:hover,
+.logreg button:hover,
 .logreg input[type = "submit"]:hover {
     background-color: #2ecc71;
 }
 
+
 span{
     color: white;
 }
+
+.home {
+    padding: 10px;
+    background-color: #333;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.home h2,
+.home p,
+.home h1 {
+    color: white;
+}
+
+.home button {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.colLeft{
+    float: left;
+    width: 20%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.colRight{
+    float: left;
+    width: 80%;
+    padding: 15px;
+}
+
+@media screen and (max-width: 1100px) {
+    .colRight,
+    .colLeft {
+        width: 100%;
+    }
+}
+
+.ucet h3,
+.ucet form {
+    display: inline-block;
+}
+
+.ucet form input{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 5px;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.ucet h3{
+    color: white;
+    margin: 5px;
+}
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th,
+td {
+    padding: 15px;
+    background-color: rgba(255,255,255,0.2);
+    color: #fff;
+    text-align: center;
+}
+

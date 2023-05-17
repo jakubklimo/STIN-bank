@@ -13,11 +13,10 @@ import java.text.ParseException;
 public class Scheduler {
 
     @Autowired
-    private CurrencyService currencyService;
+    CurrencyService currencyService;
 
-    @Scheduled(cron = "0 30 14 * * ?")
-    public void task() throws IOException, ParseException {
+    @Scheduled(cron = "0 40 14 * * ?")
+    public void executeTask() throws IOException, ParseException {
         currencyService.updateKurzy();
     }
-
 }

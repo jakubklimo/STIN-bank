@@ -46,16 +46,16 @@ public class TransactionController {
         if(account.getMena().equalsIgnoreCase(currency)){
             account.vklad(castka);
         } else if (account.getMena().equalsIgnoreCase("CZK") && !currency.equalsIgnoreCase("CZK")) {
-            Currency currencyKurz = currencyService.getKurz(currency);
+            Currency currencyKurz = currencyService.getCurrency(currency);
             double castkaNew = (currencyKurz.getKurz() / currencyKurz.getMnozstvi()) * castka;
             account.vklad(castkaNew);
         } else if (currency.equalsIgnoreCase("CZK") && !account.getMena().equalsIgnoreCase("CZK")) {
-            Currency currencyKurz = currencyService.getKurz(account.getMena());
+            Currency currencyKurz = currencyService.getCurrency(account.getMena());
             double castkaNew = castka / (currencyKurz.getKurz() / currencyKurz.getMnozstvi());
             account.vklad(castkaNew);
         } else {
-            Currency currencyVklad = currencyService.getKurz(currency);
-            Currency currencyUcet = currencyService.getKurz(account.getMena());
+            Currency currencyVklad = currencyService.getCurrency(currency);
+            Currency currencyUcet = currencyService.getCurrency(account.getMena());
 
             double castkaCzk = (currencyVklad.getKurz() / currencyVklad.getMnozstvi()) * castka;
             double castkaNew = castkaCzk / (currencyUcet.getKurz() / currencyUcet.getMnozstvi());
@@ -90,15 +90,15 @@ public class TransactionController {
         if(account.getMena().equalsIgnoreCase(currency)){
             castka = castka;
         } else if (account.getMena().equalsIgnoreCase("CZK") && !currency.equalsIgnoreCase("CZK")) {
-            Currency currencyKurz = currencyService.getKurz(currency);
+            Currency currencyKurz = currencyService.getCurrency(currency);
             castka = (currencyKurz.getKurz() / currencyKurz.getMnozstvi()) * castka;
 
         } else if (currency.equalsIgnoreCase("CZK") && !account.getMena().equalsIgnoreCase("CZK")) {
-            Currency currencyKurz = currencyService.getKurz(account.getMena());
+            Currency currencyKurz = currencyService.getCurrency(account.getMena());
             castka = castka / (currencyKurz.getKurz() / currencyKurz.getMnozstvi());
         } else {
-            Currency currencyVklad = currencyService.getKurz(currency);
-            Currency currencyUcet = currencyService.getKurz(account.getMena());
+            Currency currencyVklad = currencyService.getCurrency(currency);
+            Currency currencyUcet = currencyService.getCurrency(account.getMena());
 
             double castkaCzk = (currencyVklad.getKurz() / currencyVklad.getMnozstvi()) * castka;
             castka = castkaCzk / (currencyUcet.getKurz() / currencyUcet.getMnozstvi());

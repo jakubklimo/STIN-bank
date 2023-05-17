@@ -1,6 +1,10 @@
 package cz.tul.klimo.bank.service;
 
+import cz.tul.klimo.bank.database.CurrencyDatabase;
 import cz.tul.klimo.bank.entity.Currency;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -18,6 +22,13 @@ import java.util.Locale;
 
 @Service
 public class CurrencyService {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Autowired
+    private CurrencyDatabase currencyDatabase;
+
     private static final String CNB_URL = "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt";
     private static final DecimalFormat DECIMAL_FORMAT;
 
@@ -28,44 +39,37 @@ public class CurrencyService {
         DECIMAL_FORMAT = new DecimalFormat("#,##0.0000", symbols);
     }
 
-    private List<Currency> currencies;
     private Date lastUpdated;
 
-    public CurrencyService(){
-        this.currencies = new ArrayList<>();
+    public void createCurrency(Currency currency){
+        currencyDatabase.save(currency);
+    }
+
+    public Currency getCurrency(String code){
+        return currencyDatabase.findByCode(code);
     }
 
     public void updateKurzy() throws IOException, ParseException {
+        dropTable();
         URL url = new URL(CNB_URL);
         try(BufferedReader r = new BufferedReader(new InputStreamReader(url.openStream()))){
             String radek;
             r.readLine();
             r.readLine();
-            List<Currency> temp = new ArrayList<>();
             while((radek = r.readLine()) != null){
                 String [] sloupce = radek.split("\\|");
                 Currency kurz = new Currency();
                 kurz.setMnozstvi(Integer.parseInt(sloupce[2]));
                 kurz.setCode(sloupce[3]);
                 kurz.setKurz(DECIMAL_FORMAT.parse(sloupce[4]).doubleValue());
-                temp.add(kurz);
+                createCurrency(kurz);
             }
-            this.currencies = temp;
             this.lastUpdated = new Date();
         }
     }
 
-    public List<Currency> getKurzy() {
-        return currencies;
-    }
-
-    public Currency getKurz(String code){
-        for(Currency kurz : currencies){
-            if(kurz.getCode().equalsIgnoreCase(code)){
-                return kurz;
-            }
-        }
-        return null;
+    public void dropTable() {
+        currencyDatabase.deleteAll();
     }
 
     public Date getLastUpdated(){

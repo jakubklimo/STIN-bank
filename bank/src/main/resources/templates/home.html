@@ -4,30 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KlimoBank</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-    <h1>Přihlášen</h1>
-    <p th:text="${jmeno}"></p>
-    <p th:text="${klientNum}"></p>
-    <a href="/vytvorUcet"><button>Vytvořit účet</button></a>
-    <a href="/odhlasit"><button>Odhlásit se</button></a>
-    <h1>Účty</h1>
-    <div th:each="ucet : ${ucty}">
-        <h2 th:text="${'Číslo účtu: ' + ucet.id}"></h2>
-        <h3 th:text="${ucet.zustatek + ' ' + ucet.mena}"></h3>
-        <form th:action="@{/vklad}" method="post">
-            <input type="hidden" name="idUcet" th:value="${ucet.id}">
-            <input type="submit" name="vklad" id="vklad" value="Vklad">
-        </form>
-        <form action="/platba" method="post">
-            <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
-            <input type="submit" name="platba" id="platba" value="Platba">
-        </form>
-        <form action="/vypis" method="post">
-            <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
-            <input type="submit" name="vypis" id="vypis" value="Výpis účtu">
-        </form>
+<header>
+
+</header>
+<main class="home">
+    <div class="colLeft">
+        <h1>Přihlášen</h1>
+        <p th:text="${'Klientské číslo: ' + klientNum}"></p>
+        <p th:text="${'Uživatel: ' + jmeno + ' ' + prijmeni}"></p>
+        <a href="/vytvorUcet"><button>Vytvořit účet</button></a>
+        <a href="/odhlasit"><button>Odhlásit se</button></a>
     </div>
+    <div class="colRight">
+        <h1>Účty</h1>
+        <div class="ucet" th:each="ucet : ${ucty}">
+            <h3 th:text="${'Číslo účtu: ' + ucet.id}"></h3>
+            <h3 th:text="${ucet.zustatek + ' ' + ucet.mena}"></h3>
+            <form th:action="@{/vklad}" method="post">
+                <input type="hidden" name="idUcet" th:value="${ucet.id}">
+                <input type="submit" name="vklad" id="vklad" value="Vklad">
+            </form>
+            <form action="/platba" method="post">
+                <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
+                <input type="submit" name="platba" id="platba" value="Platba">
+            </form>
+            <form action="/vypis" method="post">
+                <input type="hidden" name="idUcet" th:value="${ucet.id}"/>
+                <input type="submit" name="vypis" id="vypis" value="Výpis účtu">
+            </form>
+        </div>
+    </div>
+</main>
+
 </body>
 </html>

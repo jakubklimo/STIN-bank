@@ -11,8 +11,8 @@
     <header>
 
     </header>
-    <main>
-        <form class="logreg" action="/index" method="post">
+    <main class="logreg">
+        <form action="/index" method="post">
             <h1>Přihlášení</h1>
             <input type="text" name="klientNum" id="klientNum" placeholder="Klientské číslo" required th:value="${userId}">
             <input type="password" name="heslo" id="heslo" placeholder="Heslo" required>

@@ -1,7 +1,11 @@
 package cz.tul.klimo.bank.entity;
 
+import jakarta.persistence.*;
+
+@Entity(name = "Currencies")
 public class Currency {
     private double kurz;
+    @Id
     private String code;
     private int mnozstvi;
 
