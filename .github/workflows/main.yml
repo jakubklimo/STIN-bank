@@ -20,7 +20,7 @@ jobs:
 
       - name: Build and test
         run: |
-          cd Bank
+          cd bank
           mvn clean test
       
     codecov:
